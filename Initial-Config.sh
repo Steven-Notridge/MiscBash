@@ -19,9 +19,9 @@ apt update
 
 # Check to see if these are installed anyway, and install them if they are not present.
 HAS_TREE="$(type "tree" &> /dev/null && echo true || echo false)"
-HAS_IPTABLES="$(type "tree" &> /dev/null && echo true || echo false)"
+HAS_IPTABLES="$(type "iptables" &> /dev/null && echo true || echo false)"
 HAS_SUDO="$(type "sudo" &> /dev/null && echo true || echo false)"
-HAS_GIT="$(type "sudo" &> /dev/null && echo true || echo false)"
+HAS_GIT="$(type "git" &> /dev/null && echo true || echo false)"
 
 if [ "${HAS_TREE}" != "false" ]; then
     echo "Tree not detected, will now install."
