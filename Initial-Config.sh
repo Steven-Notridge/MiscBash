@@ -14,8 +14,34 @@ if [[ $EUID -ne 0 ]]; then
     fi
 fi
 
-# Get basic apps that I use often.
-apt update && apt install sudo && apt install git && apt install iptables
+# Quick update.
+apt update
+
+# Check to see if these are installed anyway, and install them if they are not present.
+HAS_TREE="$(type "tree" &> /dev/null && echo true || echo false)"
+HAS_IPTABLES="$(type "tree" &> /dev/null && echo true || echo false)"
+HAS_SUDO="$(type "sudo" &> /dev/null && echo true || echo false)"
+HAS_GIT="$(type "sudo" &> /dev/null && echo true || echo false)"
+
+if [ "${HAS_TREE}" != "false" ]; then
+    echo "Tree not detected, will now install."
+    apt install tree
+fi
+
+if [ "${HAS_IPTABLES}" != "false" ]; then
+    echo "Iptables not detected, will now install."
+    apt install iptables
+fi
+
+if [ "${HAS_SUDO}" != "false" ]; then
+    echo "Sudo not detected, will now install."
+    apt install sudo
+fi
+
+if [ "${HAS_GIT}" != "false" ]; then
+    echo "git not detected, will now install."
+    apt install git
+fi
 
 # Get the username and strip to the first word.
 username=$(tail -1 /etc/passwd)
